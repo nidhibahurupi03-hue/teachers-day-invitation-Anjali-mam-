@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjali Ma'am | DTE Invitation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;600;700&display=swap');
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:#030812;color:#eefaff;font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-3;
+  background:
+   radial-gradient(circle at 15% 15%,#063b55 0,transparent 28%),
+   radial-gradient(circle at 85% 75%,#20105b 0,transparent 30%),
+   radial-gradient(circle at 50% 45%,#071b31 0,#02050b 65%);
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:-2;opacity:.14;
+  background-image:linear-gradient(#19d9ff 1px,transparent 1px),linear-gradient(90deg,#19d9ff 1px,transparent 1px);
+  background-size:44px 44px;
+}
+canvas{position:fixed;inset:0;z-index:-1;pointer-events:none}
+section{
+  min-height:100vh;padding:70px 18px;display:flex;align-items:center;
+  justify-content:center;position:relative;
+}
+.w{width:min(1000px,100%);text-align:center}
+.ey{
+  font:10px Orbitron,sans-serif;letter-spacing:4px;color:#58e8ff;
+  margin-bottom:20px;text-transform:uppercase
+}
+h1,h2{font-family:Orbitron,sans-serif;font-weight:600}
+h1{font-size:clamp(36px,10vw,82px);line-height:1.05;margin:15px 0}
+h2{font-size:clamp(30px,7vw,58px);line-height:1.1}
+.cyan{color:#58e8ff}.purple{color:#a98cff}
+.muted{color:#9eacbb;line-height:1.9}
+.card{
+ padding:32px;border:1px solid #58e8ff38;border-radius:24px;
+ background:linear-gradient(145deg,#071a2be8,#080b18e8);
+ box-shadow:0 0 50px #00d9ff12,0 25px 80px #0009;
+ backdrop-filter:blur(8px)
+}
+.hero-chip{
+ display:inline-block;padding:10px 18px;border:1px solid #58e8ff66;
+ border-radius:30px;color:#8deeff;font:10px Orbitron;letter-spacing:2px;
+ box-shadow:0 0 25px #00d9ff22
+}
+.circuit{
+ width:min(330px,80vw);height:330px;margin:0 auto 28px;position:relative;
+ border:1px solid #58e8ff44;border-radius:50%;
+ box-shadow:0 0 70px #00d9ff18,inset 0 0 60px #00d9ff0d;
+ animation:pulse 3s infinite ease-in-out;
+}
+.circuit:before{
+ content:"DTE";position:absolute;inset:0;display:flex;align-items:center;
+ justify-content:center;font:700 70px Orbitron;color:#58e8ff;
+ text-shadow:0 0 25px #00d9ff;letter-spacing:5px
+}
+.circuit:after{
+ content:"";position:absolute;inset:12%;border:1px dashed #a98cff66;
+ border-radius:50%;animation:spin 12s linear infinite
+}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:#58e8ff;box-shadow:0 0 20px #58e8ff}
+.n1{top:8%;left:49%}.n2{right:8%;top:48%}.n3{bottom:9%;left:49%}.n4{left:8%;top:48%}
+.trace{position:absolute;height:2px;background:linear-gradient(90deg,transparent,#58e8ff,transparent);box-shadow:0 0 10px #58e8ff}
+.t1{width:45%;top:28%;left:3%;transform:rotate(20deg)}.t2{width:45%;top:70%;right:3%;transform:rotate(20deg)}
+.grid{display:grid;gap:16px}.two{grid-template-columns:repeat(2,1fr)}.three{grid-template-columns:repeat(3,1fr)}
+.box,.sub{
+ padding:25px 15px;border:1px solid #58e8ff22;border-radius:18px;
+ background:#58e8ff07;transition:.35s
+}
+.box:hover,.sub:hover{transform:translateY(-7px);border-color:#58e8ff66;box-shadow:0 0 30px #00d9ff15}
+.icon{font-size:38px}
+.box b,.sub h3{display:block;font:11px Orbitron;color:#58e8ff;margin:9px}
+.box span,.sub p{font-size:13px;color:#b9c5d0;line-height:1.65}
+.quote{font:26px/1.6 Orbitron;color:#e8faff}
+.btn{
+ display:inline-block;margin-top:30px;padding:15px 25px;border:1px solid #58e8ff88;
+ border-radius:30px;background:#58e8ff0d;color:#fff;font:11px Orbitron;
+ letter-spacing:1.5px;cursor:pointer;text-decoration:none;transition:.3s
+}
+.btn:hover{background:#58e8ff18;box-shadow:0 0 35px #00d9ff2b;transform:scale(1.04)}
+.wave{
+ height:90px;margin:28px 0;position:relative;overflow:hidden;
+ border-top:1px solid #58e8ff22;border-bottom:1px solid #58e8ff22;
+}
+.wave svg{width:100%;height:100%}
+.hidden{display:none}
+.small{font:10px Orbitron;letter-spacing:3px;color:#71808e}
+.glow{animation:glow 2s infinite alternate}
+.reveal{opacity:0;transform:translateY(30px);transition:1s}.reveal.show{opacity:1;transform:none}
+
+@keyframes pulse{50%{transform:scale(1.025);box-shadow:0 0 100px #00d9ff25,inset 0 0 70px #00d9ff18}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glow{to{text-shadow:0 0 28px #58e8ff}}
+@media(max-width:650px){.two,.three{grid-template-columns:1fr}.card{padding:24px}.quote{font-size:20px}.circuit{width:270px;height:270px}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<section>
+<div class="w reveal">
+  <div class="circuit">
+    <span class="node n1"></span><span class="node n2"></span><span class="node n3"></span><span class="node n4"></span>
+    <span class="trace t1"></span><span class="trace t2"></span>
+  </div>
+  <div class="hero-chip">ELECTRONICS • DTE • CONNECTIONS</div>
+  <h1>SIGNALS <span class="cyan">•</span> CIRCUITS <span class="purple">•</span> CONNECTIONS</h1>
+  <p class="muted">A special invitation created with respect, gratitude & a little electronics magic.</p>
+  <p style="font:28px Orbitron;margin:25px 0"><span class="cyan">Anjali</span> Ma'am</p>
+  <p class="muted">Subject: <b class="cyan">DTE</b></p>
+  <p class="muted">“Every signal carries a message, and every great teacher creates a connection.”</p>
+  <a class="btn" href="#welcome">OPEN INVITATION →</a>
+</div>
+</section>
+
+
+<section>
+<div class="w reveal">
+ <div class="ey">SAVE THE DATE</div>
+ <h2>Teachers’ Day <span class="cyan">Celebration</span></h2>
+ <div class="grid three">
+  <div class="box"><div class="icon">📅</div><b>DATE</b><span>24 September 2026</span></div>
+  <div class="box"><div class="icon">⏰</div><b>TIME</b><span>12:00 PM</span></div>
+  <div class="box"><div class="icon">📍</div><b>VENUE</b><span>College Hall</span></div>
+ </div>
+ <p class="muted" style="margin-top:28px;font-size:16px">
+   Dr. Panjabrao Deshmukh Girl's Polytechnic, Amravati
+ </p>
+</div>
+</section>
+
+<section id="welcome">
+<div class="w reveal">
+  <div class="ey">A PERSONAL WELCOME</div>
+  <div class="card">
+    <h2>Dear <span class="cyan">Anjali Ma'am</span>,</h2>
+    <p class="muted">You are warmly invited to a special celebration dedicated to the teachers who guide us, inspire us and turn difficult concepts into meaningful learning.</p>
+    <p class="muted">This little digital invitation is made especially for you — with gratitude from your students. ❤️</p>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="w reveal">
+  <div class="ey">THE DTE WORLD</div>
+  <h2>Where <span class="cyan">Signals</span> Become Connections</h2>
+  <div class="wave">
+   <svg viewBox="0 0 1000 90" preserveAspectRatio="none">
+    <path d="M0 45 H70 L90 10 L110 80 L130 45 H200 L220 25 L240 65 L260 45 H340 L360 10 L380 80 L400 45 H480 L500 20 L520 70 L540 45 H620 L640 10 L660 80 L680 45 H760 L780 25 L800 65 L820 45 H900 L920 10 L940 80 L960 45 H1000"
+      fill="none" stroke="#58e8ff" stroke-width="3">
+      <animate attributeName="stroke-dashoffset" from="1000" to="0" dur="3s" repeatCount="indefinite"/>
+    </path>
+   </svg>
+  </div>
+  <div class="grid two">
+    <div class="sub"><div class="icon">〰</div><h3>SIGNALS</h3><p>Understanding how information travels, changes and connects.</p></div>
+    <div class="sub"><div class="icon">◈</div><h3>CIRCUITS</h3><p>Turning components and concepts into working systems.</p></div>
+    <div class="sub"><div class="icon">⌁</div><h3>COMMUNICATION</h3><p>Because every system is meaningful when it can communicate.</p></div>
+    <div class="sub"><div class="icon">∞</div><h3>LEARNING</h3><p>There is always another concept, another connection to discover.</p></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="w reveal">
+ <div class="ey">A FEW WORDS FOR YOU</div>
+ <h2>More Than A <span class="cyan">Subject</span></h2>
+ <div class="card">
+  <p class="muted">Ma'am, DTE is not only about circuits, signals and communication. It teaches us to observe, understand, connect ideas and solve problems with patience.</p>
+  <p class="muted">Thank you for making complicated concepts easier, answering our doubts and guiding us through every step of our learning journey.</p>
+  <p class="quote">“A teacher doesn't just transfer knowledge — they create connections that stay for a lifetime.”</p>
+ </div>
+</div>
+</section>
+
+<section>
+<div class="w reveal">
+ <div class="ey">YOUR IMPACT</div>
+ <h2>A Little <span class="cyan">Appreciation</span> ❤️</h2>
+ <div class="grid two">
+  <div class="box"><div class="icon">⚡</div><b>YOUR ENERGY</b><span>For making every lecture more engaging and alive.</span></div>
+  <div class="box"><div class="icon">◉</div><b>YOUR CLARITY</b><span>For making difficult DTE concepts easier to understand.</span></div>
+  <div class="box"><div class="icon">⌁</div><b>YOUR GUIDANCE</b><span>For helping us find the right path whenever we get stuck.</span></div>
+  <div class="box"><div class="icon">♥</div><b>YOUR SUPPORT</b><span>For encouraging us to keep learning and keep trying.</span></div>
+ </div>
+</div>
+</section>
+
+<section>
+<div class="w reveal">
+ <div class="ey">STUDENT MESSAGE</div>
+ <h2>The <span class="cyan">Connection</span> We Remember</h2>
+ <div class="card">
+  <p class="quote">“You may teach us DTE for a semester, but the way you teach us to think and connect ideas stays with us much longer.”</p>
+  <p class="muted">Thank you, Ma'am, for being a special part of our learning journey. 💙</p>
+ </div>
+</div>
+</section>
+
+<section>
+<div class="w reveal">
+ <div class="ey">A LITTLE SURPRISE</div>
+ <h2>Something Is <span class="cyan">Waiting...</span> ✨</h2>
+ <button class="btn" id="revealBtn">REVEAL SURPRISE ✨</button>
+ <div class="card hidden" id="surprise" style="margin-top:28px">
+  <p class="quote">For every lesson, every doubt, every signal and every connection...</p>
+  <h2 class="cyan glow">THANK YOU, ANJALI MA'AM ❤️</h2>
+  <p class="small">DTE • SIGNALS • CIRCUITS • CONNECTIONS</p>
+ </div>
+</div>
+</section>
+
+<section>
+<div class="w reveal">
+ <div class="ey">WITH LOVE & GRATITUDE</div>
+ <h2>Thank You For Being<br><span class="cyan">Part Of Our Journey.</span></h2>
+ <p class="muted">With love & gratitude,<br><b style="color:white">Your Students ❤️</b></p>
+ <p style="font:24px Orbitron;color:#58e8ff">SEE YOU THERE! ✨</p>
+</div>
+</section>
+
+<script>
+const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');
+let dots=[];
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+function init(){dots=Array.from({length:65},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+0.5}))}
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ dots.forEach((p,i)=>{
+  p.x+=p.vx;p.y+=p.vy;
+  if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;
+  ctx.fillStyle='rgba(88,232,255,.65)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+  for(let j=i+1;j<dots.length;j++){
+   let q=dots[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+   if(d<115){ctx.strokeStyle='rgba(88,232,255,'+(0.08*(1-d/115))+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}
+  }
+ });
+ requestAnimationFrame(draw)
+}
+addEventListener('resize',()=>{resize();init()});resize();init();draw();
+
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(x=>obs.observe(x));
+
+document.getElementById('revealBtn').onclick=()=>{
+ document.getElementById('surprise').classList.remove('hidden');
+ document.getElementById('revealBtn').textContent='SURPRISE REVEALED ❤️';
+ document.getElementById('revealBtn').disabled=true;
+};
+</script>
+</body>
+</html>
